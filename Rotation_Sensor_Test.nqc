@@ -1,0 +1,67 @@
+task main() {
+	// Set up the Sensors
+
+	// Rotation on Input 1
+	SetSensor (SENSOR_1, SENSOR_ROTATION);
+	// Make sure it starts at zero
+	ClearSensor(SENSOR_1);
+
+	// Light on Input 3
+	SetSensorType (SENSOR_3, SENSOR_TYPE_LIGHT);
+	SetSensorMode (SENSOR_3, SENSOR_MODE_PULSE);
+	// And clear this. too
+	ClearSensor(SENSOR_3);
+
+	// View the rotation sensor
+	SelectDisplay (DISPLAY_SENSOR_1);
+
+	// Wait a second to let the display reset
+	Wait (100);
+
+	// Run the motor until the rotation sensor gets to 160 )10 revolutions)
+
+	do {
+		OnFwd (OUT_A);
+	while (SENSOR_1 <= 160);
+
+	// Stop the motor and wait a second at the end
+	// Because it is bad practice to slam a motor from forward to reverse.
+
+	Off (OUT_A)
+	Wait (100);
+
+	// Now reverse and get back to zero
+
+	do {
+		OnRev (OUT_A);
+	while (SENSOR_1 >= 160);
+
+	// Stop
+	Off (OUT_A)
+	//Change the view to the light sensor
+	SelectDisplay (DISPLAY_SENSOR_3);
+	// Wait a while
+	Wait (100);
+
+	// Run the motor until the rotation sensor gets to 160 )10 revolutions)
+
+	do {
+		OnFwd (OUT_A);
+	while (SENSOR_1 <= 160);
+
+	// Stop the motor and wait a second at the end
+	// Because it is bad practice to slam a motor from forward to reverse.
+
+	Off (OUT_A)
+	Wait (100);
+
+	// Now reverse and get back to zero
+
+	do {
+		OnRev (OUT_A);
+	while (SENSOR_1 >= 160);
+
+	// Stop
+	Off (OUT_A)
+
+}
